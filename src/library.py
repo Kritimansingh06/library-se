@@ -18,3 +18,9 @@ class Library:
 
     def return_book(self, book_id):
         self.books[book_id]["status"] = "Available"
+
+    def generate_report(self):
+        report = "ID | Title | Author | Status\n"
+        for bid, info in self.books.items():
+            report += f"{bid} | {info['title']} | {info['author']} | {info['status']}\n"
+        return report

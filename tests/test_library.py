@@ -34,3 +34,9 @@ if __name__ == "__main__":
         self.lib.borrow_book(1)
         self.lib.return_book(1)
         self.assertEqual(self.lib.books[1]["status"], "Available")
+
+    def test_generate_report(self):
+        self.lib.add_book(1, "Python", "Guido")
+        report = self.lib.generate_report()
+        self.assertIn("ID | Title | Author | Status", report)
+        self.assertIn("Python", report)
