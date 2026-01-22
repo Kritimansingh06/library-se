@@ -17,3 +17,20 @@ class TestLibrarySprint1(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_borrow_book(self):
+        self.lib.add_book(1, "Python", "Guido")
+        self.lib.borrow_book(1)
+        self.assertEqual(self.lib.books[1]["status"], "Borrowed")
+
+    def test_borrow_unavailable_book(self):
+        self.lib.add_book(1, "Python", "Guido")
+        self.lib.borrow_book(1)
+        with self.assertRaises(ValueError):
+            self.lib.borrow_book(1)
+
+    def test_return_book(self):
+        self.lib.add_book(1, "Python", "Guido")
+        self.lib.borrow_book(1)
+        self.lib.return_book(1)
+        self.assertEqual(self.lib.books[1]["status"], "Available")
